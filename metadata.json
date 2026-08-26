@@ -1,0 +1,6 @@
+{
+  "name": "Shalimar Collection",
+  "description": "Luxury showroom website for Shalimar Collection featuring two connected portals: Fabric Collection and Perfumes & Oud.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
