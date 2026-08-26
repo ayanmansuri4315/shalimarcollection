@@ -139,22 +139,13 @@ export const WORLD_OF_OUD_CATEGORIES: OudCategory[] = [
     image: 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80',
   },
   {
-    id: 'bakhoor-chips',
-    name: 'Bakhoor',
-    origin: 'Hand-Cut Scented Wood Chips',
-    aging: 'Slow-Soaked in Pure Oils',
-    scentProfile: 'Aromatic incense smoke, sweet resins, and royal amber.',
-    description: 'Slow-burning agarwood chips infused with musk, rose, and amber oils for burning on traditional charcoal or electric mabkharas.',
+    id: 'kalakassi-oud',
+    name: 'Royal Kalakassi Oud',
+    origin: 'Wild Matured Heartwood',
+    aging: '30+ Years Aged Reserve',
+    scentProfile: 'Sweet floral resin, velvety honeyed smoke, and regal golden amber.',
+    description: 'The pinnacle of precious agarwood distillations, revered across royal Arab courts for its peerless depth and longevity.',
     image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 'premium-attars',
-    name: 'Premium Attars',
-    origin: 'Kannauj & Grasse Botanical Distillates',
-    aging: 'Aged in Deg-Bhapka Stills',
-    scentProfile: 'Concentrated floral nectars, pure sandalwood, and Shamama spices.',
-    description: '100% natural oil-based perfume essences that develop intimately with body warmth without alcohol volatility.',
-    image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80',
   },
 ];
 

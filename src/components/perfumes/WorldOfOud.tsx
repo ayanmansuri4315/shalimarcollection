@@ -42,51 +42,50 @@ export const WorldOfOud: React.FC = () => {
         </div>
 
         {/* Oud Categories Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {WORLD_OF_OUD_CATEGORIES.map((oud) => (
             <InteractiveCard
               key={oud.id}
               className="bg-[#2c2622] border border-[#443a34] hover:border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group"
               id={`oud-card-${oud.id}`}
             >
-              {/* Image */}
-              <div className="relative aspect-16/10 overflow-hidden bg-[#1b1715]">
+              {/* Image without unwanted gradient overlays */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-[#2c2622]">
                 <img
                   src={oud.image}
                   alt={oud.name}
                   loading="lazy"
                   decoding="async"
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2c2622] via-transparent to-transparent" />
                 
-                <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-xs text-[#c5a059] text-xs font-semibold tracking-wider uppercase">
+                <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-xs text-[#c5a059] text-xs font-semibold tracking-wider uppercase z-10">
                   {oud.aging}
                 </div>
               </div>
 
               {/* Body */}
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+              <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-center gap-1.5 text-xs text-[#c5a059] font-medium">
                     <Globe className="w-3.5 h-3.5" />
                     <span>Origin: {oud.origin}</span>
                   </div>
-                  <h3 className="text-2xl font-serif font-medium text-white group-hover:text-[#c5a059] transition-colors">
+                  <h3 className="text-xl font-serif font-medium text-white group-hover:text-[#c5a059] transition-colors">
                     {oud.name}
                   </h3>
-                  <p className="text-xs text-[#bbb0a4] leading-relaxed font-light">
+                  <p className="text-xs text-[#bbb0a4] leading-relaxed font-light line-clamp-3">
                     {oud.description}
                   </p>
                 </div>
 
                 {/* Scent Profile Pill */}
                 <div className="p-3 rounded-xl bg-[#221d1a] border border-[#3b322d] text-xs text-[#ded3c5] space-y-1">
-                  <span className="text-xs uppercase font-bold tracking-wider text-[#c5a059] block">
+                  <span className="text-[11px] uppercase font-bold tracking-wider text-[#c5a059] block">
                     Olfactory Character
                   </span>
-                  <p className="text-xs text-[#ded3c5]">
+                  <p className="text-xs text-[#ded3c5] line-clamp-2">
                     {oud.scentProfile}
                   </p>
                 </div>
