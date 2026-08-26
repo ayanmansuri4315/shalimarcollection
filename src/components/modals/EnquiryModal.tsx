@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Send, Phone, MessageSquare, Calendar, CheckCircle2, Sparkles, Loader2 } from 'lucide-react';
+import { X, Send, Phone, MessageSquare, CheckCircle2, Sparkles, Loader2 } from 'lucide-react';
 import { SHOWROOM_INFO } from '../../data/showroomData';
 
 interface EnquiryModalProps {
@@ -33,11 +33,24 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    if (initialItemName) {
-      setMessage(`Hello, I would like to enquire about the cost and availability for "${initialItemName}" from the ${portal === 'fabric' ? 'Fabric' : 'Perfumes & Oud'} Collection.`);
-      setInquiryType('Specific Item Cost');
+    if (isOpen) {
+      setSubmitted(false);
+      setIsSubmitting(false);
+      setName('');
+      setPhone('');
+      setEmail('');
+      setPreferredDate('');
+      if (initialItemName) {
+        setMessage(`Hello, I would like to enquire about the cost and availability for "${initialItemName}" from the ${portal === 'fabric' ? 'Fabric' : 'Perfumes & Oud'} Collection.`);
+        setInquiryType('Specific Item Cost');
+      } else {
+        setMessage('');
+        setInquiryType(
+          portal === 'fabric' ? 'Fabric Cost Estimate' : 'Fragrance & Oud Cost Estimate'
+        );
+      }
     }
-  }, [initialItemName, portal]);
+  }, [isOpen, initialItemName, portal]);
 
   if (!isOpen) return null;
 
@@ -96,7 +109,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
         <button
           onClick={handleResetAndClose}
           id="close-enquiry-modal-btn"
-          className="absolute top-4 right-4 p-2 text-[#73685e] hover:text-[#1f1a17] hover:bg-[#efe8df] rounded-full transition-colors"
+          className="absolute top-4 right-4 p-2 text-[#73685e] hover:text-[#1f1a17] hover:bg-[#efe8df] rounded-full transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -110,13 +123,13 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
             <h3 className="text-2xl font-serif font-medium text-[#1f1a17]">
               Request submitted successfully
             </h3>
-            <p className="text-sm text-[#6c625a] leading-relaxed max-w-md mx-auto">
+            <p className="text-sm text-[#6c625a] leading-relaxed max-w-md mx-auto font-light">
               Thank you for reaching out to Shalimar Collection. Our concierge team has logged your request and will contact you shortly with cost details.
             </p>
             <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href={`tel:${SHOWROOM_INFO.primaryPhone}`}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#241f1c] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#3c342f] transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#241f1c] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#3c342f] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer"
               >
                 <Phone className="w-4 h-4" />
                 <span>Call ({SHOWROOM_INFO.primaryPhone})</span>
@@ -124,7 +137,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
               <button
                 type="button"
                 onClick={handleResetAndClose}
-                className="px-5 py-2.5 rounded-xl border border-[#d5c9bc] bg-[#fcfaf7] hover:bg-[#f2ece2] text-[#3c342f] text-xs font-semibold uppercase tracking-wider transition-colors"
+                className="px-5 py-2.5 rounded-xl border border-[#d5c9bc] bg-[#fcfaf7] hover:bg-[#f2ece2] text-[#3c342f] text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer"
               >
                 Close Window
               </button>
@@ -133,14 +146,14 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
         ) : (
           <div>
             <div className="text-center mb-6">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f4ece1] border border-[#e2d5c3] text-[#8a6825] text-xs font-semibold uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f4ece1] border border-[#e2d5c3] text-[#8a6825] text-xs font-semibold uppercase tracking-wider mb-2 shadow-xs">
                 <Sparkles className="w-3 h-3" />
                 <span>Showroom Concierge</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#1f1a17]">
                 Book Cost
               </h3>
-              <p className="text-xs sm:text-sm text-[#73685e] mt-1">
+              <p className="text-xs sm:text-sm text-[#73685e] mt-1 font-light">
                 {portal === 'fabric'
                   ? 'Request a personalized fabric estimate, bespoke tailoring quotation, or swatch sample pricing.'
                   : 'Request private perfume pricing, custom gift coffret rates, or vintage oud sampling quotes.'}
@@ -161,7 +174,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                 type="button"
                 onClick={handleWhatsAppSend}
                 id="modal-touch-to-message-btn"
-                className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#25d366] hover:bg-[#20ba5a] text-white text-xs font-semibold shadow-xs transition-colors"
+                className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#25d366] hover:bg-[#20ba5a] text-white text-xs font-semibold shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer"
               >
                 <MessageSquare className="w-3.5 h-3.5 fill-white" />
                 <span>Touch to Message</span>
@@ -271,10 +284,10 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
               <div className="pt-2">
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || submitted}
                   id="submit-enquiry-form-btn"
-                  className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#241f1c] text-white font-medium text-xs sm:text-sm uppercase tracking-wider transition-colors ${
-                    isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#3d342f]'
+                  className={`w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#241f1c] text-white font-medium text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] shadow-xs cursor-pointer ${
+                    isSubmitting || submitted ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#3d342f]'
                   }`}
                 >
                   {isSubmitting ? (
@@ -291,7 +304,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                 </button>
               </div>
 
-              <p className="text-[11px] text-[#8c8177] text-center pt-1">
+              <p className="text-xs text-[#8c8177] text-center pt-1">
                 Showroom contact: <a href={`tel:${SHOWROOM_INFO.primaryPhone}`} className="underline text-[#5c534b] font-medium">{SHOWROOM_INFO.displayPrimaryPhone}</a> &middot; <a href={`tel:${SHOWROOM_INFO.secondaryPhone}`} className="underline text-[#5c534b] font-medium">{SHOWROOM_INFO.displaySecondaryPhone}</a>
               </p>
             </form>
@@ -301,4 +314,3 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
     </div>
   );
 };
-

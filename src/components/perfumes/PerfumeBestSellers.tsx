@@ -1,7 +1,9 @@
 import React from 'react';
-import { Eye, Sparkles, MessageSquare, Info, Droplet } from 'lucide-react';
+import { Eye, Sparkles, Info, Droplet } from 'lucide-react';
 import { BEST_SELLING_PERFUMES } from '../../data/perfumeData';
 import { PerfumeItem } from '../../types';
+import { AnimatedSection } from '../shared/AnimatedSection';
+import { InteractiveCard } from '../shared/InteractiveCard';
 
 interface PerfumeBestSellersProps {
   onViewItem: (item: PerfumeItem) => void;
@@ -11,13 +13,17 @@ export const PerfumeBestSellers: React.FC<PerfumeBestSellersProps> = ({
   onViewItem,
 }) => {
   return (
-    <section className="py-20 bg-[#f7f3eb] border-y border-[#ede3d5]" id="perfume-best-sellers">
+    <AnimatedSection
+      direction="right"
+      className="py-20 bg-[#f7f3eb] border-y border-[#ede3d5]"
+      id="perfume-best-sellers"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ede1cf] border border-[#dcc9b0] text-[#7a5d20] text-xs font-semibold uppercase tracking-widest mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#ede1cf] border border-[#dcc9b0] text-[#7a5d20] text-xs font-semibold uppercase tracking-widest mb-2 shadow-xs">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Patron Favorites</span>
             </div>
@@ -37,10 +43,10 @@ export const PerfumeBestSellers: React.FC<PerfumeBestSellersProps> = ({
         {/* Product Cards Grid (Non-Ecommerce) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {BEST_SELLING_PERFUMES.map((perfume) => (
-            <div
+            <InteractiveCard
               key={perfume.id}
               onClick={() => onViewItem(perfume)}
-              className="group bg-[#fcfaf7] border border-[#e4dacb] hover:border-[#b38e44]/60 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 flex flex-col cursor-pointer"
+              className="bg-[#fcfaf7] border border-[#e4dacb] hover:border-[#b38e44]/60 rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer"
               id={`best-seller-${perfume.id}`}
             >
               {/* Image Frame */}
@@ -48,11 +54,13 @@ export const PerfumeBestSellers: React.FC<PerfumeBestSellersProps> = ({
                 <img
                   src={perfume.image}
                   alt={perfume.name}
+                  loading="lazy"
+                  decoding="async"
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#241f1c]/80 backdrop-blur-xs text-[#f2ebd9] text-[10px] font-semibold uppercase tracking-wider">
+                <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-[#241f1c]/80 backdrop-blur-xs text-[#f2ebd9] text-xs font-semibold uppercase tracking-wider">
                   Best Seller
                 </div>
 
@@ -75,19 +83,19 @@ export const PerfumeBestSellers: React.FC<PerfumeBestSellersProps> = ({
                       Concentrate
                     </span>
                   </div>
-                  <h3 className="text-lg font-serif font-medium text-[#1f1a17] mt-1 line-clamp-1">
+                  <h3 className="text-lg font-serif font-medium text-[#1f1a17] mt-1 line-clamp-1 group-hover:text-[#8a6825] transition-colors">
                     {perfume.name}
                   </h3>
                   <p className="text-xs text-[#5c5249] font-medium mt-0.5">
                     {perfume.type}
                   </p>
-                  <p className="text-xs text-[#5c5249] mt-1.5 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-[#5c5249] mt-1.5 line-clamp-2 leading-relaxed font-light">
                     {perfume.description}
                   </p>
                 </div>
 
                 {/* Bottom Showroom Action */}
-                <div className="pt-2 border-t border-[#ede3d5] flex items-center justify-between">
+                <div className="pt-3 border-t border-[#ede3d5] flex items-center justify-between">
                   <button
                     type="button"
                     onClick={(e) => {
@@ -95,22 +103,22 @@ export const PerfumeBestSellers: React.FC<PerfumeBestSellersProps> = ({
                       onViewItem(perfume);
                     }}
                     id={`view-fragrance-item-${perfume.id}`}
-                    className="text-xs font-semibold text-[#241f1c] group-hover:text-[#8a6825] transition-colors flex items-center gap-1"
+                    className="text-xs font-semibold text-[#241f1c] group-hover:text-[#8a6825] transition-colors flex items-center gap-1 cursor-pointer"
                   >
                     <Info className="w-3.5 h-3.5 text-[#8a6825]" />
                     <span>Olfactory Notes</span>
                   </button>
 
-                  <span className="text-[11px] text-[#8a6825] font-medium">
+                  <span className="text-xs text-[#8a6825] font-medium">
                     Available in Store
                   </span>
                 </div>
               </div>
-            </div>
+            </InteractiveCard>
           ))}
         </div>
 
       </div>
-    </section>
+    </AnimatedSection>
   );
 };

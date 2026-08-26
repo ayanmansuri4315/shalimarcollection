@@ -1,7 +1,8 @@
 import React from 'react';
-import { MapPin, Phone, MessageSquare, Clock, Navigation, Calendar, Mail, Instagram } from 'lucide-react';
+import { MapPin, Phone, MessageSquare, Clock, Navigation, Instagram } from 'lucide-react';
 import { SHOWROOM_INFO, SHOWROOM_IMAGES_FABRIC, SHOWROOM_IMAGES_PERFUME } from '../../data/showroomData';
 import { PortalType } from '../../types';
+import { AnimatedSection } from './AnimatedSection';
 
 interface ShowroomSectionProps {
   currentPortal: PortalType;
@@ -21,12 +22,16 @@ export const ShowroomSection: React.FC<ShowroomSectionProps> = ({
   };
 
   return (
-    <section className="py-20 bg-[#fbf9f5]" id="showroom-section">
+    <AnimatedSection
+      direction="left"
+      className="py-20 bg-[#fbf9f5]"
+      id="showroom-section"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f4ece1] border border-[#e2d5c3] text-[#7a5d20] text-xs font-semibold uppercase tracking-widest">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#f4ece1] border border-[#e2d5c3] text-[#7a5d20] text-xs font-semibold uppercase tracking-widest shadow-xs">
             <MapPin className="w-3.5 h-3.5" />
             <span>Showroom Destination</span>
           </div>
@@ -116,17 +121,17 @@ export const ShowroomSection: React.FC<ShowroomSectionProps> = ({
               <a
                 href={`tel:${SHOWROOM_INFO.primaryPhone}`}
                 id="showroom-call-us-btn"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#241f1c] hover:bg-[#3d342f] text-white text-xs font-semibold uppercase tracking-wider transition-colors"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#241f1c] hover:bg-[#3d342f] text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] shadow-xs cursor-pointer"
               >
                 <Phone className="w-4 h-4" />
-                <span>Call ({SHOWROOM_INFO.primaryPhone})</span>
+                <span>Call Us</span>
               </a>
 
               <button
                 type="button"
                 onClick={handleWhatsApp}
                 id="showroom-whatsapp-btn"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#25d366] hover:bg-[#20ba5a] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-xs"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#25d366] hover:bg-[#20ba5a] text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] shadow-xs cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4 fill-white" />
                 <span>Touch to Message</span>
@@ -137,7 +142,7 @@ export const ShowroomSection: React.FC<ShowroomSectionProps> = ({
                 target="_blank"
                 rel="noreferrer"
                 id="showroom-directions-btn"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-[#d8c8b4] bg-[#f5ede2] hover:bg-[#ebdcc8] text-[#241f1c] text-xs font-semibold uppercase tracking-wider transition-colors"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-[#d8c8b4] bg-[#f5ede2] hover:bg-[#ebdcc8] text-[#241f1c] text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer"
               >
                 <Navigation className="w-4 h-4 text-[#8a6825]" />
                 <span>Get Directions</span>
@@ -148,7 +153,7 @@ export const ShowroomSection: React.FC<ShowroomSectionProps> = ({
                 target="_blank"
                 rel="noreferrer"
                 id="showroom-instagram-action-btn"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-[#d8c8b4] bg-[#f5ede2] hover:bg-[#ebdcc8] text-[#241f1c] text-xs font-semibold uppercase tracking-wider transition-colors"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-[#d8c8b4] bg-[#f5ede2] hover:bg-[#ebdcc8] text-[#241f1c] text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer"
               >
                 <Instagram className="w-4 h-4 text-[#8a6825]" />
                 <span>Instagram</span>
@@ -159,12 +164,14 @@ export const ShowroomSection: React.FC<ShowroomSectionProps> = ({
 
           {/* Right Showroom Architecture Gallery */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="aspect-16/10 rounded-2xl overflow-hidden shadow-md border border-[#e2d5c3] bg-[#eae0d1]">
+            <div className="aspect-16/10 rounded-2xl overflow-hidden shadow-md border border-[#e2d5c3] bg-[#eae0d1] group">
               <img
                 src={images[0].url}
                 alt={images[0].title}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
 
@@ -177,8 +184,10 @@ export const ShowroomSection: React.FC<ShowroomSectionProps> = ({
                   <img
                     src={img.url}
                     alt={img.title}
+                    loading="lazy"
+                    decoding="async"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent p-3 flex items-end">
                     <span className="text-white text-xs font-serif font-medium drop-shadow-xs">
@@ -188,11 +197,12 @@ export const ShowroomSection: React.FC<ShowroomSectionProps> = ({
                 </div>
               ))}
             </div>
+
           </div>
 
         </div>
 
       </div>
-    </section>
+    </AnimatedSection>
   );
 };

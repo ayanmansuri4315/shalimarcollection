@@ -3,6 +3,8 @@ import { Star, Sparkles, CheckCircle2, Quote } from 'lucide-react';
 import { FABRIC_REVIEWS } from '../../data/fabricData';
 import { PERFUME_REVIEWS } from '../../data/perfumeData';
 import { PortalType } from '../../types';
+import { AnimatedSection } from './AnimatedSection';
+import { InteractiveCard } from './InteractiveCard';
 
 interface CustomerReviewsProps {
   currentPortal: PortalType;
@@ -14,12 +16,16 @@ export const CustomerReviews: React.FC<CustomerReviewsProps> = ({
   const reviews = currentPortal === 'fabric' ? FABRIC_REVIEWS : PERFUME_REVIEWS;
 
   return (
-    <section className="py-20 bg-[#fbf9f5]" id="customer-reviews">
+    <AnimatedSection
+      direction="left"
+      className="py-20 bg-[#fbf9f5]"
+      id="customer-reviews"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f4ece1] border border-[#e2d5c3] text-[#7a5d20] text-xs font-semibold uppercase tracking-widest">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#f4ece1] border border-[#e2d5c3] text-[#7a5d20] text-xs font-semibold uppercase tracking-widest shadow-xs">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Patron Testimonials</span>
           </div>
@@ -34,9 +40,9 @@ export const CustomerReviews: React.FC<CustomerReviewsProps> = ({
         {/* Reviews Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {reviews.map((rev) => (
-            <div
+            <InteractiveCard
               key={rev.id}
-              className="bg-[#fcfaf7] border border-[#e8ded1] hover:border-[#b38e44]/60 rounded-2xl p-7 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-6 relative group"
+              className="bg-[#fcfaf7] border border-[#e8ded1] hover:border-[#b38e44]/60 rounded-2xl p-7 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 relative group"
               id={`review-card-${rev.id}`}
             >
               <div className="space-y-4">
@@ -75,7 +81,7 @@ export const CustomerReviews: React.FC<CustomerReviewsProps> = ({
                   {rev.date}
                 </span>
               </div>
-            </div>
+            </InteractiveCard>
           ))}
         </div>
 
@@ -89,6 +95,6 @@ export const CustomerReviews: React.FC<CustomerReviewsProps> = ({
         </div>
 
       </div>
-    </section>
+    </AnimatedSection>
   );
 };

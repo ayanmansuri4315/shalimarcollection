@@ -44,7 +44,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         <button
           onClick={onClose}
           id="close-product-detail-btn"
-          className="absolute top-4 right-4 z-10 p-2 text-[#73685e] hover:text-[#1f1a17] bg-[#fcfaf7]/80 hover:bg-[#efe8df] backdrop-blur-xs rounded-full transition-colors"
+          className="absolute top-4 right-4 z-10 p-2 text-[#73685e] hover:text-[#1f1a17] bg-[#fcfaf7]/80 hover:bg-[#efe8df] backdrop-blur-xs rounded-full transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -61,7 +61,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 className="w-full h-full object-cover"
               />
               {(fabricItem?.tag || perfumeItem?.bestSeller) && (
-                <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#241f1c]/80 backdrop-blur-xs text-[#e8dfd3] text-xs font-medium tracking-wider uppercase">
+                <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#241f1c]/80 backdrop-blur-xs text-[#e8dfd3] text-xs font-medium tracking-wider uppercase shadow-xs">
                   {fabricItem?.tag || (perfumeItem?.bestSeller ? 'Best Seller' : 'Reserve')}
                 </div>
               )}
@@ -81,7 +81,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 </p>
               </div>
 
-              <p className="text-sm text-[#5a5047] leading-relaxed">
+              <p className="text-sm text-[#5a5047] leading-relaxed font-light">
                 {item.description}
               </p>
 
@@ -140,7 +140,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   type="button"
                   onClick={handleDirectWhatsApp}
                   id="direct-whatsapp-item-btn"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#25d366] text-white font-semibold text-xs sm:text-sm hover:bg-[#20ba5a] transition-colors shadow-xs"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#25d366] text-white font-semibold text-xs sm:text-sm hover:bg-[#20ba5a] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] shadow-xs cursor-pointer"
                 >
                   <MessageSquare className="w-4 h-4 fill-white" />
                   <span>Touch to Message (WhatsApp)</span>
@@ -148,7 +148,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <a
                   href={`tel:${SHOWROOM_INFO.primaryPhone}`}
                   id="call-showroom-item-btn"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#241f1c] text-white font-medium text-xs sm:text-sm hover:bg-[#3c342f] transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#241f1c] text-white font-medium text-xs sm:text-sm hover:bg-[#3c342f] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer"
                 >
                   <ShieldCheck className="w-4 h-4 text-[#c5a059]" />
                   <span>Call Showroom ({SHOWROOM_INFO.displayPrimaryPhone})</span>

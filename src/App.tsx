@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { PortalSwitcherBanner } from './components/PortalSwitcherBanner';
 import { FabricHero } from './components/fabric/FabricHero';
@@ -16,9 +17,10 @@ import { PerfumeGiftSets } from './components/perfumes/PerfumeGiftSets';
 import { ShowroomSection } from './components/shared/ShowroomSection';
 import { GoogleMapSection } from './components/shared/GoogleMapSection';
 import { CustomerReviews } from './components/shared/CustomerReviews';
-import { InstagramSection } from './components/shared/InstagramSection';
+import { InstagramReels } from './components/shared/InstagramReels';
 import { Footer } from './components/shared/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { ScrollProgress } from './components/shared/ScrollProgress';
 import { EnquiryModal } from './components/modals/EnquiryModal';
 import { ProductDetailModal } from './components/modals/ProductDetailModal';
 import { PhotoLightbox } from './components/modals/PhotoLightbox';
@@ -57,6 +59,22 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleSelectFabricCategory = (_category: FabricCategory) => {
+    const el = document.getElementById('fabric-new-arrivals');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSelectPerfumeCategory = (category: PerfumeCategory) => {
+    let targetId = 'perfume-best-sellers';
+    if (category.id === 'oud-collection') {
+      targetId = 'perfume-oud-world';
+    } else if (category.id === 'gift-sets') {
+      targetId = 'perfume-gift-sets';
+    }
+    const el = document.getElementById(targetId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const handleOpenEnquiry = (itemName?: string) => {
     setEnquiryItemName(itemName || '');
     setEnquiryModalOpen(true);
@@ -80,8 +98,17 @@ export default function App() {
     setLightboxOpen(true);
   };
 
+  const portalVariants = {
+    initial: { opacity: 0, y: 12 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+    exit: { opacity: 0, y: -12, transition: { duration: 0.25, ease: 'easeIn' } },
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#fbf9f5] text-[#241f1c]">
+    <div className="min-h-screen flex flex-col bg-[#fbf9f5] text-[#241f1c] selection:bg-[#c5a059]/30 selection:text-[#1f1a17]">
+      {/* Premium Top Smooth Scroll Progress Indicator */}
+      <ScrollProgress />
+
       {/* Universal Luxury Navigation */}
       <Navbar
         currentPortal={currentPortal}
@@ -89,111 +116,127 @@ export default function App() {
         onOpenEnquiry={handleOpenEnquiry}
       />
 
-      {/* Main Content Area */}
-      <main className="flex-1">
-        {currentPortal === 'fabric' ? (
-          /* ======================================= */
-          /* PORTAL 1: FABRIC COLLECTION (PRIMARY)   */
-          /* ======================================= */
-          <div key="fabric-portal" className="transition-opacity duration-300">
-            {/* 1. Fabric Hero */}
-            <FabricHero
-              onSwitchPortal={handleSwitchPortal}
-            />
+      {/* Main Content Area with Smooth Portal Transition */}
+      <main className="flex-1 overflow-x-hidden">
+        <AnimatePresence mode="wait">
+          {currentPortal === 'fabric' ? (
+            /* ======================================= */
+            /* PORTAL 1: FABRIC COLLECTION (PRIMARY)   */
+            /* ======================================= */
+            <motion.div
+              key="fabric-portal"
+              variants={portalVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full"
+            >
+              {/* 1. Fabric Hero */}
+              <FabricHero
+                onSwitchPortal={handleSwitchPortal}
+              />
 
-            {/* 2. Fabric Collections Grid */}
-            <FabricCollections
-              onSelectCategory={(cat: FabricCategory) => handleOpenEnquiry(cat.name)}
-            />
+              {/* 2. Fabric Collections Grid (RIGHT ➡️) */}
+              <FabricCollections
+                onSelectCategory={handleSelectFabricCategory}
+              />
 
-            {/* 3. New Arrivals */}
-            <FabricNewArrivals
-              onViewItem={handleViewFabric}
-            />
+              {/* 3. New Arrivals (LEFT ⬅️) */}
+              <FabricNewArrivals
+                onViewItem={handleViewFabric}
+              />
 
-            {/* 4. The Fabric Experience */}
-            <FabricExperience />
+              {/* 4. The Fabric Experience (RIGHT ➡️) */}
+              <FabricExperience />
 
-            {/* 5. Portal Switcher Banner */}
-            <PortalSwitcherBanner
-              currentPortal={currentPortal}
-              onSwitchPortal={handleSwitchPortal}
-            />
+              {/* 5. Portal Switcher Banner (RIGHT ➡️) */}
+              <PortalSwitcherBanner
+                currentPortal={currentPortal}
+                onSwitchPortal={handleSwitchPortal}
+              />
 
-            {/* 6. Lookbook / Gallery */}
-            <FabricLookbook onOpenLightbox={handleOpenLightbox} />
+              {/* 6. Lookbook / Gallery (LEFT ⬅️) */}
+              <FabricLookbook onOpenLightbox={handleOpenLightbox} />
 
-            {/* 7. Our Story */}
-            <FabricStory />
+              {/* 7. Our Story (RIGHT ➡️) */}
+              <FabricStory />
 
-            {/* 8. Visit Our Showroom */}
-            <ShowroomSection
-              currentPortal={currentPortal}
-            />
+              {/* 8. Visit Our Showroom (LEFT ⬅️) */}
+              <ShowroomSection
+                currentPortal={currentPortal}
+              />
 
-            {/* 9. Interactive Google Map */}
-            <GoogleMapSection />
+              {/* 9. Interactive Google Map (RIGHT ➡️) */}
+              <GoogleMapSection />
 
-            {/* 10. Customer Reviews */}
-            <CustomerReviews
-              currentPortal={currentPortal}
-            />
+              {/* 10. Customer Reviews (LEFT ⬅️) */}
+              <CustomerReviews
+                currentPortal={currentPortal}
+              />
 
-            {/* 11. Follow Us On Instagram */}
-            <InstagramSection currentPortal={currentPortal} />
-          </div>
-        ) : (
-          /* ======================================= */
-          /* PORTAL 2: PERFUMES & OUD COLLECTION    */
-          /* ======================================= */
-          <div key="perfumes-portal" className="transition-opacity duration-300">
-            {/* 1. Perfume Hero */}
-            <PerfumeHero
-              onSwitchPortal={handleSwitchPortal}
-            />
+              {/* 11. Follow Us On Instagram (Reels) (RIGHT ➡️) */}
+              <InstagramReels currentPortal={currentPortal} />
+            </motion.div>
+          ) : (
+            /* ======================================= */
+            /* PORTAL 2: PERFUMES & OUD COLLECTION    */
+            /* ======================================= */
+            <motion.div
+              key="perfumes-portal"
+              variants={portalVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="w-full"
+            >
+              {/* 1. Perfume Hero */}
+              <PerfumeHero
+                onSwitchPortal={handleSwitchPortal}
+              />
 
-            {/* 2. Perfume Collections Grid */}
-            <PerfumeCollections
-              onSelectCategory={(cat: PerfumeCategory) => handleOpenEnquiry(cat.name)}
-            />
+              {/* 2. Perfume Collections Grid (RIGHT ➡️) */}
+              <PerfumeCollections
+                onSelectCategory={handleSelectPerfumeCategory}
+              />
 
-            {/* 3. Best Selling Perfumes */}
-            <PerfumeBestSellers
-              onViewItem={handleViewPerfume}
-            />
+              {/* 3. Experience The World Of Oud (LEFT ⬅️) */}
+              <WorldOfOud />
 
-            {/* 4. Experience The World Of Oud */}
-            <WorldOfOud />
+              {/* 4. Best Selling Perfumes (RIGHT ➡️) */}
+              <PerfumeBestSellers
+                onViewItem={handleViewPerfume}
+              />
 
-            {/* 5. Why Choose Us */}
-            <PerfumeWhyChooseUs />
+              {/* 5. Why Choose Us (LEFT ⬅️) */}
+              <PerfumeWhyChooseUs />
 
-            {/* 6. Portal Switcher Banner */}
-            <PortalSwitcherBanner
-              currentPortal={currentPortal}
-              onSwitchPortal={handleSwitchPortal}
-            />
+              {/* 6. Portal Switcher Banner (LEFT ⬅️) */}
+              <PortalSwitcherBanner
+                currentPortal={currentPortal}
+                onSwitchPortal={handleSwitchPortal}
+              />
 
-            {/* 7. Gift Sets */}
-            <PerfumeGiftSets />
+              {/* 7. Gift Sets (RIGHT ➡️) */}
+              <PerfumeGiftSets />
 
-            {/* 8. Showroom (Perfume/Oud) */}
-            <ShowroomSection
-              currentPortal={currentPortal}
-            />
+              {/* 8. Showroom (LEFT ⬅️) */}
+              <ShowroomSection
+                currentPortal={currentPortal}
+              />
 
-            {/* 9. Interactive Google Map */}
-            <GoogleMapSection />
+              {/* 9. Interactive Google Map (RIGHT ➡️) */}
+              <GoogleMapSection />
 
-            {/* 10. Customer Reviews */}
-            <CustomerReviews
-              currentPortal={currentPortal}
-            />
+              {/* 10. Customer Reviews (LEFT ⬅️) */}
+              <CustomerReviews
+                currentPortal={currentPortal}
+              />
 
-            {/* 11. Follow Us On Instagram */}
-            <InstagramSection currentPortal={currentPortal} />
-          </div>
-        )}
+              {/* 11. Follow Us On Instagram (Reels) (RIGHT ➡️) */}
+              <InstagramReels currentPortal={currentPortal} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
 
       {/* Universal Luxury Footer */}

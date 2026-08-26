@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles, Droplet, Layers, PhoneCall, ChevronRight, Clock } from 'lucide-react';
+import { Menu, X, Sparkles, Droplet, Layers, PhoneCall, ChevronRight } from 'lucide-react';
 import { SHOWROOM_INFO } from '../data/showroomData';
 import { PortalType } from '../types';
 
@@ -67,10 +67,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={() => onSwitchPortal('fabric')}
                 id="top-switch-fabric-btn"
-                className={`flex items-center gap-1 px-3 py-0.5 rounded-full text-xs font-medium transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
                   currentPortal === 'fabric'
-                    ? 'bg-[#c5a059] text-[#1a1614] shadow-xs'
-                    : 'text-[#bbb0a4] hover:text-white'
+                    ? 'bg-[#c5a059] text-[#1a1614] shadow-xs font-semibold'
+                    : 'text-[#bbb0a4] hover:text-white hover:bg-white/5'
                 }`}
               >
                 <Layers className="w-3 h-3" />
@@ -79,10 +79,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={() => onSwitchPortal('perfumes')}
                 id="top-switch-perfumes-btn"
-                className={`flex items-center gap-1 px-3 py-0.5 rounded-full text-xs font-medium transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 cursor-pointer ${
                   currentPortal === 'perfumes'
-                    ? 'bg-[#c5a059] text-[#1a1614] shadow-xs'
-                    : 'text-[#bbb0a4] hover:text-white'
+                    ? 'bg-[#c5a059] text-[#1a1614] shadow-xs font-semibold'
+                    : 'text-[#bbb0a4] hover:text-white hover:bg-white/5'
                 }`}
               >
                 <Droplet className="w-3 h-3" />
@@ -121,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 id="brand-logo-btn"
-                className="text-left group"
+                className="text-left group cursor-pointer"
               >
                 <span className="block font-display text-xl sm:text-2xl lg:text-2xl font-bold tracking-[0.2em] text-[#1f1a17] group-hover:text-[#8a6825] transition-colors">
                   SHALIMAR
@@ -154,7 +154,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   onClick={() => onSwitchPortal('perfumes')}
                   id="nav-switch-to-perfumes-btn"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f4ece1] border border-[#e4d6c3] text-[#8a6825] hover:bg-[#ebdcc8] text-xs font-semibold transition-all"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f4ece1] border border-[#e4d6c3] text-[#8a6825] hover:bg-[#ebdcc8] text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer shadow-2xs"
                 >
                   <Droplet className="w-3.5 h-3.5 text-[#8a6825]" />
                   <span>Perfumes & Oud</span>
@@ -164,7 +164,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   onClick={() => onSwitchPortal('fabric')}
                   id="nav-switch-to-fabric-btn"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f4ece1] border border-[#e4d6c3] text-[#8a6825] hover:bg-[#ebdcc8] text-xs font-semibold transition-all"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#f4ece1] border border-[#e4d6c3] text-[#8a6825] hover:bg-[#ebdcc8] text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer shadow-2xs"
                 >
                   <Layers className="w-3.5 h-3.5 text-[#8a6825]" />
                   <span>Fabric Collection</span>
@@ -172,11 +172,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
               )}
 
-              {/* Book Cost CTA — The Single Enquiry Action */}
+              {/* Book Cost CTA */}
               <button
                 onClick={() => onOpenEnquiry()}
                 id="nav-book-cost-btn"
-                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#241f1c] hover:bg-[#3d342f] text-[#fcfaf7] text-xs font-semibold uppercase tracking-wider shadow-xs transition-colors"
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#241f1c] hover:bg-[#3d342f] text-[#fcfaf7] text-xs font-semibold uppercase tracking-wider shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#c5a059]" />
                 <span>Book Cost</span>
@@ -188,14 +188,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={() => onOpenEnquiry()}
                 id="mobile-book-cost-btn"
-                className="px-3 py-1.5 rounded-lg bg-[#241f1c] text-white text-xs font-medium uppercase tracking-wider"
+                className="px-3 py-1.5 rounded-lg bg-[#241f1c] text-white text-xs font-medium uppercase tracking-wider cursor-pointer"
               >
                 Book Cost
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 id="mobile-hamburger-btn"
-                className="p-2 rounded-xl text-[#3c342f] hover:bg-[#eee6da] transition-colors"
+                className="p-2 rounded-xl text-[#3c342f] hover:bg-[#eee6da] transition-colors cursor-pointer"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -220,7 +220,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                 }}
                 id="mobile-drawer-portal-switch-btn"
-                className="px-3 py-1.5 rounded-lg bg-[#241f1c] text-[#fcfaf7] text-xs font-medium"
+                className="px-3 py-1.5 rounded-lg bg-[#241f1c] text-[#fcfaf7] text-xs font-medium cursor-pointer"
               >
                 {currentPortal === 'fabric' ? 'Open Fragrance' : 'Open Fabric'}
               </button>
@@ -247,7 +247,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onOpenEnquiry();
                 }}
                 id="mobile-drawer-book-cost-btn"
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#241f1c] text-white text-xs font-semibold uppercase tracking-wider"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#241f1c] text-white text-xs font-semibold uppercase tracking-wider cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-[#c5a059]" />
                 <span>Book Cost</span>

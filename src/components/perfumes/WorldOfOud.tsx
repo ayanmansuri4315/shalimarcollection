@@ -2,6 +2,8 @@ import React from 'react';
 import { Sparkles, Globe, MessageSquare } from 'lucide-react';
 import { WORLD_OF_OUD_CATEGORIES } from '../../data/perfumeData';
 import { SHOWROOM_INFO } from '../../data/showroomData';
+import { AnimatedSection } from '../shared/AnimatedSection';
+import { InteractiveCard } from '../shared/InteractiveCard';
 
 export const WorldOfOud: React.FC = () => {
   const handleDirectWhatsApp = (oudName?: string) => {
@@ -14,7 +16,11 @@ export const WorldOfOud: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-[#241f1c] text-[#f7f2ea] relative overflow-hidden" id="perfume-oud-world">
+    <AnimatedSection
+      direction="left"
+      className="py-20 bg-[#241f1c] text-[#f7f2ea] relative overflow-hidden"
+      id="perfume-oud-world"
+    >
       {/* Subtle Warm Background Glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#c5a059]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#c5a059]/10 rounded-full blur-3xl pointer-events-none" />
@@ -23,7 +29,7 @@ export const WorldOfOud: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#38302b] border border-[#52453d] text-[#c5a059] text-xs font-semibold uppercase tracking-widest">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#38302b] border border-[#52453d] text-[#c5a059] text-xs font-semibold uppercase tracking-widest shadow-xs">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Sacred Distillations</span>
           </div>
@@ -38,9 +44,9 @@ export const WorldOfOud: React.FC = () => {
         {/* Oud Categories Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {WORLD_OF_OUD_CATEGORIES.map((oud) => (
-            <div
+            <InteractiveCard
               key={oud.id}
-              className="bg-[#2c2622] border border-[#443a34] hover:border-[#c5a059]/60 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 flex flex-col group"
+              className="bg-[#2c2622] border border-[#443a34] hover:border-[#c5a059]/80 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group"
               id={`oud-card-${oud.id}`}
             >
               {/* Image */}
@@ -48,12 +54,14 @@ export const WorldOfOud: React.FC = () => {
                 <img
                   src={oud.image}
                   alt={oud.name}
+                  loading="lazy"
+                  decoding="async"
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2c2622] via-transparent to-transparent" />
                 
-                <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-xs text-[#c5a059] text-xs font-semibold tracking-wider uppercase">
+                <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-xs text-[#c5a059] text-xs font-semibold tracking-wider uppercase">
                   {oud.aging}
                 </div>
               </div>
@@ -65,10 +73,10 @@ export const WorldOfOud: React.FC = () => {
                     <Globe className="w-3.5 h-3.5" />
                     <span>Origin: {oud.origin}</span>
                   </div>
-                  <h3 className="text-2xl font-serif font-medium text-white">
+                  <h3 className="text-2xl font-serif font-medium text-white group-hover:text-[#c5a059] transition-colors">
                     {oud.name}
                   </h3>
-                  <p className="text-xs text-[#bbb0a4] leading-relaxed">
+                  <p className="text-xs text-[#bbb0a4] leading-relaxed font-light">
                     {oud.description}
                   </p>
                 </div>
@@ -88,13 +96,13 @@ export const WorldOfOud: React.FC = () => {
                   type="button"
                   onClick={() => handleDirectWhatsApp(oud.name)}
                   id={`touch-message-oud-${oud.id}`}
-                  className="w-full py-3 px-4 rounded-xl bg-[#3c342e] hover:bg-[#25d366] text-white text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-3 px-4 rounded-xl bg-[#3c342e] hover:bg-[#25d366] text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer shadow-xs"
                 >
                   <MessageSquare className="w-3.5 h-3.5 fill-current" />
                   <span>Touch to Message</span>
                 </button>
               </div>
-            </div>
+            </InteractiveCard>
           ))}
         </div>
 
@@ -103,7 +111,7 @@ export const WorldOfOud: React.FC = () => {
           <h4 className="text-xl font-serif font-medium text-white">
             Schedule a Private Scent Ritual
           </h4>
-          <p className="text-xs sm:text-sm text-[#bbb0a4]">
+          <p className="text-xs sm:text-sm text-[#bbb0a4] font-light">
             Experience how pure Dehn Al Oud adapts and warms against your skin at our dedicated showroom scent bar.
           </p>
           <div className="pt-2">
@@ -111,7 +119,7 @@ export const WorldOfOud: React.FC = () => {
               type="button"
               onClick={() => handleDirectWhatsApp()}
               id="book-oud-ritual-btn"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25d366] hover:bg-[#20ba5a] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#25d366] hover:bg-[#20ba5a] text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] shadow-sm cursor-pointer"
             >
               <MessageSquare className="w-4 h-4 fill-white" />
               <span>Touch to Message Showroom</span>
@@ -120,7 +128,6 @@ export const WorldOfOud: React.FC = () => {
         </div>
 
       </div>
-    </section>
+    </AnimatedSection>
   );
 };
-

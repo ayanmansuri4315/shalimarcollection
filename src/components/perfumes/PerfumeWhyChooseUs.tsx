@@ -2,6 +2,7 @@ import React from 'react';
 import { Sparkles, ShieldCheck, UserCheck, Gift, CheckCircle2, MessageSquare } from 'lucide-react';
 import { PERFUME_WHY_CHOOSE_US } from '../../data/perfumeData';
 import { SHOWROOM_INFO } from '../../data/showroomData';
+import { AnimatedSection } from '../shared/AnimatedSection';
 
 export const PerfumeWhyChooseUs: React.FC = () => {
   const getIcon = (iconName: string) => {
@@ -25,25 +26,31 @@ export const PerfumeWhyChooseUs: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-[#fbf9f5]" id="perfume-why-choose-us">
+    <AnimatedSection
+      direction="left"
+      className="py-20 bg-[#fbf9f5]"
+      id="perfume-why-choose-us"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left: Large Editorial Fragrance Photography */}
           <div className="lg:col-span-6 relative">
-            <div className="relative mx-auto max-w-lg lg:max-w-none">
-              <div className="aspect-4/5 rounded-2xl overflow-hidden shadow-lg border border-[#e2d5c3] bg-[#ece2d3]">
+            <div className="relative mx-auto max-w-lg lg:max-w-none group">
+              <div className="aspect-4/5 rounded-2xl overflow-hidden shadow-xl border border-[#e2d5c3] bg-[#ece2d3]">
                 <img
                   src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=1000&q=80"
                   alt="Precious Aged Agarwood and Crystal Flacons at Shalimar Collection"
+                  loading="lazy"
+                  decoding="async"
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
 
               {/* Inset Decorative Label */}
-              <div className="absolute -bottom-6 -right-4 sm:right-6 p-5 rounded-2xl bg-[#fcfaf7] border border-[#e2d5c3] shadow-md max-w-xs space-y-1">
+              <div className="absolute -bottom-6 -right-4 sm:right-6 p-5 rounded-2xl bg-[#fcfaf7] border border-[#e2d5c3] shadow-lg max-w-xs space-y-1">
                 <span className="text-xs uppercase tracking-widest text-[#8a6825] font-semibold block">
                   Purity Guarantee
                 </span>
@@ -57,7 +64,7 @@ export const PerfumeWhyChooseUs: React.FC = () => {
           {/* Right: Informational Points */}
           <div className="lg:col-span-6 space-y-8">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f4ece1] border border-[#e2d5c3] text-[#7a5d20] text-xs font-semibold uppercase tracking-widest">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#f4ece1] border border-[#e2d5c3] text-[#7a5d20] text-xs font-semibold uppercase tracking-widest shadow-xs">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Unrivaled Authenticity</span>
               </div>
@@ -74,15 +81,15 @@ export const PerfumeWhyChooseUs: React.FC = () => {
               {PERFUME_WHY_CHOOSE_US.map((point) => (
                 <div 
                   key={point.title}
-                  className="p-5 rounded-xl bg-[#fcfaf7] border border-[#e8ded1] space-y-2 hover:border-[#b38e44]/50 transition-colors"
+                  className="p-5 rounded-2xl bg-[#fcfaf7] border border-[#e8ded1] shadow-xs space-y-2 hover:border-[#b38e44]/60 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#f5ede2] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-[#f5ede2] flex items-center justify-center">
                     {getIcon(point.icon)}
                   </div>
-                  <h3 className="text-lg font-serif font-medium text-[#1f1a17]">
+                  <h3 className="text-base font-serif font-medium text-[#1f1a17]">
                     {point.title}
                   </h3>
-                  <p className="text-xs text-[#6c625a] leading-relaxed">
+                  <p className="text-xs text-[#6c625a] leading-relaxed font-light">
                     {point.description}
                   </p>
                 </div>
@@ -95,9 +102,9 @@ export const PerfumeWhyChooseUs: React.FC = () => {
                 type="button"
                 onClick={handleWhatsApp}
                 id="perfume-why-us-consultation-btn"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#241f1c] hover:bg-[#25d366] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-xs group"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#241f1c] hover:bg-[#3d342f] text-white text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] shadow-sm cursor-pointer group"
               >
-                <MessageSquare className="w-4 h-4 text-[#c5a059] group-hover:text-white" />
+                <MessageSquare className="w-4 h-4 text-[#c5a059] group-hover:text-[#e5c98d]" />
                 <span>Touch to Message Showroom</span>
               </button>
             </div>
@@ -107,6 +114,6 @@ export const PerfumeWhyChooseUs: React.FC = () => {
         </div>
 
       </div>
-    </section>
+    </AnimatedSection>
   );
 };

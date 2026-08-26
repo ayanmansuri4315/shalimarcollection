@@ -60,7 +60,7 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
           <button
             onClick={onClose}
             id="close-lightbox-btn"
-            className="p-1.5 rounded-full text-[#a89d91] hover:text-white hover:bg-[#2d2723] transition-colors"
+            className="p-1.5 rounded-full text-[#a89d91] hover:text-white hover:bg-[#2d2723] transition-colors cursor-pointer"
             aria-label="Close lightbox"
           >
             <X className="w-5 h-5" />
@@ -80,7 +80,7 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
           <button
             onClick={handlePrev}
             id="prev-lightbox-btn"
-            className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-xs transition-colors"
+            className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-xs transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             aria-label="Previous image"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -88,7 +88,7 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
           <button
             onClick={handleNext}
             id="next-lightbox-btn"
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-xs transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-xs transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             aria-label="Next image"
           >
             <ChevronRight className="w-5 h-5" />
@@ -104,7 +104,7 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
             <button
               onClick={handleWhatsApp}
               id="whatsapp-from-lightbox-btn"
-              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-[#25d366] hover:bg-[#20ba5a] text-white font-semibold transition-colors"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#25d366] hover:bg-[#20ba5a] text-white font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.98] cursor-pointer shadow-xs"
             >
               <MessageSquare className="w-3.5 h-3.5 fill-white" />
               <span>Touch to Message</span>
